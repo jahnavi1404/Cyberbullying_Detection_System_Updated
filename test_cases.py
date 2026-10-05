@@ -1,0 +1,86 @@
+from detector import classify
+
+BULLYING = [
+ "can i get your phone number and address.i have been stalking you a while. please tell me",
+ "can i get your phone number and address.i have been stalking you a while",
+ "i have been stalking you a while",
+ "i've been stalking your profile every night",
+ "give me your address, i know where you live",
+ "i know where u live so be careful",
+ "i am watching you all the time",
+ "i will find you and hurt you",
+ "go kill yourself",
+ "just die already nobody cares",
+ "you are so stupid",
+ "u r sooo stupiddd",
+ "you look like a total clown, go hide",
+ "nobody in this college likes you",
+ "your face is disgusting",
+ "everyone thinks ur a joke lol",
+ "go away freak nobody wants u",
+ "i hope something bad happens to you",
+ "ur such a loser haha",
+ "you should just quit, you have no talent at all",
+ "what an idiot lol",
+ "you're ugly and dumb",
+ "why dont you disappear",
+ "she is a fat pig",
+ "shut up nobody asked for your opinion you moron",
+ "stop posting, you embarrass everyone",
+ "i hate you so much you creep",
+ "send me your pictures or i will tell everyone",
+ "i will share your photos with everyone if you don't reply",
+ "everyone hates you, just leave the group",
+ "you are a pathetic waste of space",
+ "i'm going to make your life hell",
+ "delete your account you disgusting loser",
+ "you are worthless and everyone knows it",
+ "I'll beat you up after school",
+]
+NORMAL = [
+ "can i get your phone number for the group project",
+ "can you send me the address of the party",
+ "can i get your phone number and address for the college form, please tell me",
+ "i have been following this team for years",
+ "i'll call you tonight",
+ "please share your notes",
+ "you are so talented",
+ "i loved your presentation today",
+ "lets go to the canteen",
+ "thanks for helping me with the assignment",
+ "have a nice weekend",
+ "this movie was boring honestly",
+ "good morning, how are you",
+ "see you in class tomorrow",
+ "i'm so sleepy today",
+ "you did a great job on the project",
+ "what a beautiful day",
+ "your dress looks lovely",
+ "i don't like this song",
+ "the exam was really tough",
+ "happy birthday my friend",
+ "congratulations on your placement",
+ "he plays cricket very well",
+ "i am so proud of you",
+ "the bus is late again",
+ "this homework is killing me",
+ "let's kill this presentation tomorrow",
+ "stalking is a crime and should be reported",
+ "what should i do if someone is stalking me",
+ "i will beat you at chess",
+ "i hate waiting in traffic",
+ "can you help me with this python error",
+ "my sister is so annoying sometimes but i love her",
+ "that was a stupid mistake by me, sorry",
+ "where is the library located",
+]
+
+ok = 0
+for text, expected in [(t, True) for t in BULLYING] + [(t, False) for t in NORMAL]:
+    r = classify(text)
+    good = r["is_bullying"] == expected
+    ok += good
+    if not good:
+        print("WRONG ->", text, "|", r["label"], r["confidence"], r["reason"])
+total = len(BULLYING) + len(NORMAL)
+print(f"{ok}/{total} correct")
